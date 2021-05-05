@@ -4,7 +4,9 @@ import 'bulma/css/bulma.css';
 class TodayFood extends Component {
   render() {
     const { totalFood } = this.props;
-    let total = 0
+    let total = totalFood.reduce((acc, food)=>{
+      return acc + (food.calories*food.quantity)
+    }, 0)
     return (
       <div>
         <h1>Today's Food</h1>
@@ -16,10 +18,10 @@ class TodayFood extends Component {
                   {food.quantity} {food.name} = {food.calories} calories
                 </li>
               </ul>
-              <p>Total : {food.calories * food.quantity} calorie</p>
             </div>
           );
         })}
+        <p>Total: {total} calories</p>
       </div>
     );
   }
